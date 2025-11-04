@@ -1,0 +1,88 @@
+---
+title: "Pancreas Atlas Explorer"
+format: 
+    html:
+        theme: united
+        page-layout: full
+        css: style.css
+execute:
+    echo: true
+    warning: false
+    message: false
+server: shiny
+bibliography: references.bib
+---
+
+These are interactive apps that enable exploration of scRNAseq and spatial transcriptomics datasets for healthy donor pancreas and pancreatic adenocarcinoma (PDAC) samples. The samples are integrated from [Elhossiny et al, 2025](), [@steele2020multimodal], [@carpenter2023analysis], [@carpenter2024krt17high] studies. The app is created based on ShinyCell2 [@chen2025shinycell2] with modifications. Seurat objects of the integrated datasets here can be downloaded from [Zenodo](). If you use this app for your research, please cite the original studies.
+
+```{=html}
+    <div class="card-container">
+        <a href="https://pascadimaglianolab.shinyapps.io/scRefApp/" class="card-link">
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="images/scRef_UMAP.jpeg">
+                </div>
+                <div class="card-caption">
+                    <div class="card-title">scRNAseq Atlas Explorer</div>
+                    <p class="card-desc">Explore ~200k cells from healthy donor pancreas and PDAC samples</p>
+                </div>
+            </div>
+        </a>
+        <a href="https://pascadimaglianolab.shinyapps.io/spatialapp/" class="card-link">
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="images/spatial_sample.jpeg">
+                </div>
+                <div class="card-caption">
+                    <div class="card-title">Spatial Samples Visualizer</div>
+                    <p class="card-desc">Explore spatial transcriptomics data with paired H&E images.</p>
+                </div>
+            </div>
+        </a>
+        <a href="https://pascadimaglianolab.shinyapps.io/integratedspatialapp/" class="card-link">
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="images/spatial_UMAP.jpeg">
+                </div>
+                <div class="card-caption">
+                    <div class="card-title">Integrated Spatial Atlas Explorer</div>
+                    <p class="card-desc">Explore ~160k visium spots across healthy donor and PDAC spatial samples</p>
+                </div>
+            </div>
+        </a>
+    </div>
+```
+***
+
+# How to use the apps
+
+The app is best used on a computer for optimal viewing and interaction. Each subsection comes with a sidebar to select what to plot, customize the plots, subset cells to include certain samples, tissue types or cell types. Also You can save high quality `PDF` or `PNG` files of the plots. 
+
+![](images/sidebar.png){width=15% fig-align="left"}
+
+## scRNAseq Atlas and Integrated Spatial Atlas Explorers: 
+
+Provides exploration for integrated samples and provides the following functionalities
+
+* **UMAP (with Zoom)**: provided UMAP representation for the integrated dataset to visualize different cell types and gene expression
+* **UMAP (side-by-side)**: provides side-by-side visualization of the UMAP representation to simultaneously check the expression of two genes, or the genes versus cell type annotation
+* **Single Gene Expression**: allows visualization of the expression of a single gene across different cell types and spatial domains using Violin or BoxPlots and provides the option to run statistical tests
+* **Multiple Gene Expression**: allows visualization of multiple gene expression
+* **Gene Co-expression**: allows the simultaneous visualization of two gene co-expression on the UMAP representation
+* **Proportion Histogram**: allows the exploration of cell type proportion across different samples groups
+
+## Spatial Samples Visualization :
+
+Provides exploration for individual spatial samples with the paired H&E. Full resolution images can downloaded from Zenodo [here](). This section allows side by side visualizaiton of the gene expression pattern in each sample and enrichment for different cell types based on the cell type deconvolution results or the defined spatial domains.
+
+***
+
+# Methods
+
+Data is processed according to methods described in [preprint]() and code used for analysis is available [here]()
+
+***
+
+# Contact us
+
+If you have any questions please feel free to contact the authors, Ahmed M. Elhossiny ([hossiny@umich.edu)](mailto:hossiny@umich.edu)) and Marina Pasca di Magliano ([marinapa@umich.edu](mailto:marinapa@umich.edu))
