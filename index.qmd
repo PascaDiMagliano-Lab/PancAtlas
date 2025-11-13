@@ -1,5 +1,5 @@
 ---
-title: "Pancreas Atlas Explorer"
+title: "Human Pancreas Atlas Explorer"
 subtitle: "Interactive exploration of scRNAseq and spatial transcriptomics datasets"
 format: 
     html:
@@ -9,12 +9,18 @@ format:
         monofont: "Fira Code"
         code-fold: true
         smooth-scroll: true
+        page-layout: full
+        toc: true
+        toc-title : "Jump to"
+        toc-location: left
+        toc_float: true
+        citations-hover: true
 bibliography: references.bib
 ---
 
+## Study Overview {#study-overview}
 ::: {.callout-note icon="bi-info-circle-fill"}
 ## Study Overview
-
 These interactive applications enable comprehensive exploration of single-cell RNA sequencing (scRNAseq) and spatial transcriptomics datasets from healthy donor pancreas and pancreatic ductal adenocarcinoma (PDAC) samples. Data are integrated from [Elhossiny et al., 2025](), @steele2020multimodal, @carpenter2023analysis, and @carpenter2024krt17high studies.
 
 The applications are built using ShinyCell2 [@chen2025shinycell2] with custom modifications. Seurat objects of the integrated datasets are available for download from [Zenodo](). 
@@ -22,40 +28,40 @@ The applications are built using ShinyCell2 [@chen2025shinycell2] with custom mo
 **If you use these applications in your research, please cite the original studies listed above.**
 :::
 
-<!-- ## Applications {#sec-applications} -->
+## Applications {#sec-applications}
 
 ```{=html}
     <div class="card-container">
-        <a href="[https://pascadimaglianolab.shinyapps.io/scRefApp/](https://pascadimaglianolab.shinyapps.io/scRefApp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/scRefApp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/scRef_UMAP.jpeg" alt="scRNAseq Atlas UMAP visualization">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">scRNAseq Atlas Explorer</div>
-                    <p class="card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples</p>
+                    <p class="card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples with cell type annotation and gene expression visualization.</p>
                 </div>
             </div>
         </a>
-        <a href="[https://pascadimaglianolab.shinyapps.io/spatialapp/](https://pascadimaglianolab.shinyapps.io/spatialapp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/spatialapp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/spatial_sample.jpeg" alt="Spatial transcriptomics sample">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">Spatial Samples Visualizer</div>
-                    <p class="card-desc">Explore spatial transcriptomics data with paired H&E histology images</p>
+                    <p class="card-desc">Explore spatial transcriptomics data of 14 different samples from healthy donor pancreas and PDAC with paired H&E histology images</p>
                 </div>
             </div>
         </a>
-        <a href="[https://pascadimaglianolab.shinyapps.io/integratedspatialapp/](https://pascadimaglianolab.shinyapps.io/integratedspatialapp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/integratedspatialapp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/spatial_UMAP.jpeg" alt="Integrated spatial atlas UMAP">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">Integrated Spatial Atlas Explorer</div>
-                    <p class="card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples</p>
+                    <p class="card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples with spatial domain annotation and gene expression visualization.</p>
                 </div>
             </div>
         </a>
@@ -71,7 +77,7 @@ The applications are built using ShinyCell2 [@chen2025shinycell2] with custom mo
 For optimal viewing and interaction, we recommend using these applications on a desktop or laptop computer with a modern web browser.
 :::
 
-### Interface Overview
+### **Interface Overview**
 
 Each application features an interactive **sidebar** for customizing visualizations:
 
@@ -125,71 +131,70 @@ Each application features an interactive **sidebar** for customizing visualizati
 
 These applications provide comprehensive tools for integrated dataset exploration:
 
-##### UMAP (with Zoom)
+:::{.panel-tabset}
+
+## UMAP (with Zoom)
 Interactive UMAP representation with zoom functionality to visualize cell types and gene expression patterns at multiple scales.
 
 <div class="img-center">
 ![](images/UMAP_w_Zoom.png)
 </div>
 
-##### UMAP (Side-by-Side)
+## UMAP (Side-by-Side)
 Simultaneous visualization of two genes or gene expression alongside cell type annotations for comparative analysis.
 
 <div class="img-center">
 ![](images/UMAP_side_by_side.png)
 </div>
 
-##### Single Gene Expression
+## Single Gene Expression
 Violin plots and box plots showing gene expression across cell types and spatial domains, with built-in statistical testing capabilities.
 
 <div class="img-center">  
 ![](images/SingleGene_Exp.png)
 </div>
 
-##### Multiple Gene Expression
+## Multiple Gene Expression
 Comparative visualization of expression patterns for multiple genes of interest.
 
 <div class="img-center">
 ![](images/MultiGene_Exp.png)
 </div>
 
-##### Gene Co-expression
+## Gene Co-expression
 Simultaneous visualization of two-gene co-expression patterns on UMAP representations.
 
 <div class="img-center">
 ![](images/Gene_CoExp.png)
 </div>
 
-##### Proportion Histogram
+## Proportion Histogram
 Analysis of cell type proportions across different sample groups and conditions.
 
 <div class="img-center">
 ![](images/PropHist.png)
 </div>
+:::
 
 ### **Spatial Samples Visualizer**
 
-This application enables detailed exploration of individual spatial transcriptomics samples:
+This application enables detailed exploration of individual spatial transcriptomics samples with corresponding H&E Visualization, Full resolution images available via [Zenodo](). :
 
-##### Paired H&E Visualization 
-Side-by-side comparison of gene expression and histology.
-
-##### Cell Type Enrichment
+:::{.panel-tabset}
+## Cell Type Enrichment
 Spatial mapping based on deconvolution results.
 
 <div class="img-center">
 ![](images/GeneVFraction.png)
 </div>
 
-##### Spatial Domains
+## Spatial Domains
 Visualization of defined tissue regions and microenvironments.
 
 <div class="img-center">
 ![](images/GeneVSpatialDomain.png)
 </div>
-
-##### High-Resolution Images
-Full resolution images available via [Zenodo]().
+:::
 
 ---
 

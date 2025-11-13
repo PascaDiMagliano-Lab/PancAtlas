@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pancreas Atlas Explorer</title>
+<title>Human Pancreas Atlas Explorer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,21 +60,40 @@ div.csl-indent {
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Jump to</h2>
+   
+  <ul>
+  <li><a href="#study-overview" id="toc-study-overview" class="nav-link active" data-scroll-target="#study-overview">Study Overview</a></li>
+  <li><a href="#sec-applications" id="toc-sec-applications" class="nav-link" data-scroll-target="#sec-applications">Applications</a></li>
+  <li><a href="#sec-user-guide" id="toc-sec-user-guide" class="nav-link" data-scroll-target="#sec-user-guide">User Guide</a>
+  <ul class="collapse">
+  <li><a href="#interface-overview" id="toc-interface-overview" class="nav-link" data-scroll-target="#interface-overview"><strong>Interface Overview</strong></a></li>
+  <li><a href="#scrnaseq-atlas-integrated-spatial-atlas-explorers" id="toc-scrnaseq-atlas-integrated-spatial-atlas-explorers" class="nav-link" data-scroll-target="#scrnaseq-atlas-integrated-spatial-atlas-explorers"><strong>scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</strong></a></li>
+  <li><a href="#spatial-samples-visualizer" id="toc-spatial-samples-visualizer" class="nav-link" data-scroll-target="#spatial-samples-visualizer"><strong>Spatial Samples Visualizer</strong></a></li>
+  </ul></li>
+  <li><a href="#sec-methods" id="toc-sec-methods" class="nav-link" data-scroll-target="#sec-methods">Methods</a></li>
+  <li><a href="#sec-contact" id="toc-sec-contact" class="nav-link" data-scroll-target="#sec-contact">Contact &amp; Support</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pancreas Atlas Explorer</h1>
+<h1 class="title">Human Pancreas Atlas Explorer</h1>
 <p class="subtitle lead">Interactive exploration of scRNAseq and spatial transcriptomics datasets</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -86,6 +105,8 @@ div.csl-indent {
 </header>
 
 
+<section id="study-overview" class="level2">
+<h2 class="anchored" data-anchor-id="study-overview">Study Overview</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -101,43 +122,46 @@ Study Overview
 <p><strong>If you use these applications in your research, please cite the original studies listed above.</strong></p>
 </div>
 </div>
-<!-- ## Applications {#sec-applications} -->
+</section>
+<section id="sec-applications" class="level2">
+<h2 class="anchored" data-anchor-id="sec-applications">Applications</h2>
     <div class="card-container">
-        <a href="[https://pascadimaglianolab.shinyapps.io/scRefApp/](https://pascadimaglianolab.shinyapps.io/scRefApp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/scRefApp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/scRef_UMAP.jpeg" alt="scRNAseq Atlas UMAP visualization">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">scRNAseq Atlas Explorer</div>
-                    <p class="card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples</p>
+                    <p class="card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples with cell type annotation and gene expression visualization.</p>
                 </div>
             </div>
         </a>
-        <a href="[https://pascadimaglianolab.shinyapps.io/spatialapp/](https://pascadimaglianolab.shinyapps.io/spatialapp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/spatialapp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/spatial_sample.jpeg" alt="Spatial transcriptomics sample">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">Spatial Samples Visualizer</div>
-                    <p class="card-desc">Explore spatial transcriptomics data with paired H&amp;E histology images</p>
+                    <p class="card-desc">Explore spatial transcriptomics data of 14 different samples from healthy donor pancreas and PDAC with paired H&amp;E histology images</p>
                 </div>
             </div>
         </a>
-        <a href="[https://pascadimaglianolab.shinyapps.io/integratedspatialapp/](https://pascadimaglianolab.shinyapps.io/integratedspatialapp/)" class="card-link" target="_blank">
+        <a href="https://pascadimaglianolab.shinyapps.io/integratedspatialapp/" class="card-link" target="_blank">
             <div class="card">
                 <div class="card-image-wrapper">
                     <img class="card-image" src="images/spatial_UMAP.jpeg" alt="Integrated spatial atlas UMAP">
                 </div>
                 <div class="card-caption">
                     <div class="card-title">Integrated Spatial Atlas Explorer</div>
-                    <p class="card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples</p>
+                    <p class="card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples with spatial domain annotation and gene expression visualization.</p>
                 </div>
             </div>
         </a>
     </div>
 <hr>
+</section>
 <section id="sec-user-guide" class="level2">
 <h2 class="anchored" data-anchor-id="sec-user-guide">User Guide</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -154,7 +178,7 @@ Optimal Viewing
 </div>
 </div>
 <section id="interface-overview" class="level3">
-<h3 class="anchored" data-anchor-id="interface-overview">Interface Overview</h3>
+<h3 class="anchored" data-anchor-id="interface-overview"><strong>Interface Overview</strong></h3>
 <p>Each application features an interactive <strong>sidebar</strong> for customizing visualizations:</p>
 <div class="sidebar-card-grid">
 
@@ -203,75 +227,69 @@ Optimal Viewing
 <section id="scrnaseq-atlas-integrated-spatial-atlas-explorers" class="level3">
 <h3 class="anchored" data-anchor-id="scrnaseq-atlas-integrated-spatial-atlas-explorers"><strong>scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</strong></h3>
 <p>These applications provide comprehensive tools for integrated dataset exploration:</p>
-<section id="umap-with-zoom" class="level5">
-<h5 class="anchored" data-anchor-id="umap-with-zoom">UMAP (with Zoom)</h5>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">UMAP (with Zoom)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">UMAP (Side-by-Side)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Single Gene Expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Multiple Gene Expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Gene Co-expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Proportion Histogram</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Interactive UMAP representation with zoom functionality to visualize cell types and gene expression patterns at multiple scales.</p>
 <div class="img-center">
 <p><img src="images/UMAP_w_Zoom.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="umap-side-by-side" class="level5">
-<h5 class="anchored" data-anchor-id="umap-side-by-side">UMAP (Side-by-Side)</h5>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Simultaneous visualization of two genes or gene expression alongside cell type annotations for comparative analysis.</p>
 <div class="img-center">
 <p><img src="images/UMAP_side_by_side.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="single-gene-expression" class="level5">
-<h5 class="anchored" data-anchor-id="single-gene-expression">Single Gene Expression</h5>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>Violin plots and box plots showing gene expression across cell types and spatial domains, with built-in statistical testing capabilities.</p>
 <div class="img-center">
 <p><img src="images/SingleGene_Exp.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="multiple-gene-expression" class="level5">
-<h5 class="anchored" data-anchor-id="multiple-gene-expression">Multiple Gene Expression</h5>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <p>Comparative visualization of expression patterns for multiple genes of interest.</p>
 <div class="img-center">
 <p><img src="images/MultiGene_Exp.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="gene-co-expression" class="level5">
-<h5 class="anchored" data-anchor-id="gene-co-expression">Gene Co-expression</h5>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
 <p>Simultaneous visualization of two-gene co-expression patterns on UMAP representations.</p>
 <div class="img-center">
 <p><img src="images/Gene_CoExp.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="proportion-histogram" class="level5">
-<h5 class="anchored" data-anchor-id="proportion-histogram">Proportion Histogram</h5>
+</div>
+<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
 <p>Analysis of cell type proportions across different sample groups and conditions.</p>
 <div class="img-center">
 <p><img src="images/PropHist.png" class="img-fluid"></p>
 </div>
-</section>
+</div>
+</div>
+</div>
 </section>
 <section id="spatial-samples-visualizer" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-samples-visualizer"><strong>Spatial Samples Visualizer</strong></h3>
-<p>This application enables detailed exploration of individual spatial transcriptomics samples:</p>
-<section id="paired-he-visualization" class="level5">
-<h5 class="anchored" data-anchor-id="paired-he-visualization">Paired H&amp;E Visualization</h5>
-<p>Side-by-side comparison of gene expression and histology.</p>
-</section>
-<section id="cell-type-enrichment" class="level5">
-<h5 class="anchored" data-anchor-id="cell-type-enrichment">Cell Type Enrichment</h5>
+<p>This application enables detailed exploration of individual spatial transcriptomics samples with corresponding H&amp;E Visualization, Full resolution images available via <a href="">Zenodo</a>. :</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Cell Type Enrichment</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Spatial Domains</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Spatial mapping based on deconvolution results.</p>
 <div class="img-center">
 <p><img src="images/GeneVFraction.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="spatial-domains" class="level5">
-<h5 class="anchored" data-anchor-id="spatial-domains">Spatial Domains</h5>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Visualization of defined tissue regions and microenvironments.</p>
 <div class="img-center">
 <p><img src="images/GeneVSpatialDomain.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="high-resolution-images" class="level5">
-<h5 class="anchored" data-anchor-id="high-resolution-images">High-Resolution Images</h5>
-<p>Full resolution images available via <a href="">Zenodo</a>.</p>
+</div>
+</div>
+</div>
 <hr>
-</section>
 </section>
 </section>
 <section id="sec-methods" class="level2">
