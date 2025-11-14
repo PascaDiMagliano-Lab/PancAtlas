@@ -23,7 +23,7 @@ bibliography: references.bib
 ## Study Overview
 These interactive applications enable comprehensive exploration of single-cell RNA sequencing (scRNAseq) and spatial transcriptomics datasets from healthy donor pancreas and pancreatic ductal adenocarcinoma (PDAC) samples. Data are integrated from [Elhossiny et al., 2025](), @steele2020multimodal, @carpenter2023analysis, and @carpenter2024krt17high studies.
 
-The applications are built using ShinyCell2 [@chen2025shinycell2] with custom modifications. Seurat objects of the integrated datasets are available for download from [Zenodo](). 
+The applications are built using ShinyCell2 [@chen2025shinycell2] with custom modifications. Seurat objects of the integrated datasets are available for download from [Zenodo](https://zenodo.org/records/17519496?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjFjOGY2NGFmLWI1OGUtNGZkOS05MmZmLTExNGM1NzdjYmIwZiIsImRhdGEiOnt9LCJyYW5kb20iOiIwN2Q0MjVlNTFmODIwYjJhMjM5NGQyNzM3MmYyYzU3ZiJ9.vqx-K9hz-6uTP93Yk3_8cqejYIWI5Smow6gvP-ultT9aB9fs3w0umuFg5H4mtgc1Nrmq_YxSpS6LO0X6939pRA). 
 
 **If you use these applications in your research, please cite the original studies listed above.**
 :::
@@ -131,7 +131,7 @@ Each application features an interactive **sidebar** for customizing visualizati
 
 These applications provide comprehensive tools for integrated dataset exploration:
 
-:::{.panel-tabset}
+:::{.panel-tabset .nav-pills}
 
 ## UMAP (with Zoom)
 Interactive UMAP representation with zoom functionality to visualize cell types and gene expression patterns at multiple scales.
@@ -178,9 +178,9 @@ Analysis of cell type proportions across different sample groups and conditions.
 
 ### **Spatial Samples Visualizer**
 
-This application enables detailed exploration of individual spatial transcriptomics samples with corresponding H&E Visualization, Full resolution images available via [Zenodo](). :
+This application enables detailed exploration of individual spatial transcriptomics samples with corresponding H&E Visualization, Full resolution images available via [Zenodo](https://zenodo.org/records/17519632?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImY5MzJjN2M0LTI0M2MtNDU3Yy1iMTc5LTdjMjAwNWMyOTdlZSIsImRhdGEiOnt9LCJyYW5kb20iOiJkMWMxOGNjZTc0YjMxNDZkYTZmNTU0Yzk2MjI0NzZhMCJ9.cWr3Yj6YsHRMesD2DTDa-bgu5VM97ZdgJ3q7WNjSo-2S2Jw0xayfvK2PTXZd56HOkepTqWpNwfGMLNTpd9Kk2w).
 
-:::{.panel-tabset}
+:::{.panel-tabset .nav-pills}
 ## Cell Type Enrichment
 Spatial mapping based on deconvolution results.
 
@@ -200,7 +200,7 @@ Visualization of defined tissue regions and microenvironments.
 
 ## Methods {#sec-methods}
 
-Data processing and analysis methods are described in detail in our [preprint](). All analysis code and pipelines are publicly available in our [GitHub repository]().
+Data processing and analysis methods will be available upon publication. All analysis code and pipelines are publicly available in our [GitHub repository](https://pascadimagliano-lab.github.io/PancAtlas_Methods/).
 
 ---
 
