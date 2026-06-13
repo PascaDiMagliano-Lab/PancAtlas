@@ -1,746 +1,419 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<html lang="en" data-bs-theme="light">
+<head>
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pancreas Precancer Atlas</title>
+<link rel="icon" type="image/png" href="panc_logo.png">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<!-- Bootswatch "Yeti" (Bootstrap 5) to match the bslib bs_theme used by the Shiny apps -->
+<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/yeti/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-
-<title>Human Pancreas Atlas Explorer</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
-
-
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-5587e4076abda12dc46e1b8f80aab673.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<style>html{ scroll-behavior: smooth; }</style>
-
-
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="overrides.css">
+<link rel="stylesheet" href="home.css">
 </head>
+<body>
 
-<body class="quarto-light">
-
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Jump to</h2>
-   
-  <ul>
-  <li><a href="#study-overview" id="toc-study-overview" class="nav-link active" data-scroll-target="#study-overview">Study Overview</a></li>
-  <li><a href="#sec-applications" id="toc-sec-applications" class="nav-link" data-scroll-target="#sec-applications">Applications</a></li>
-  <li><a href="#sec-user-guide" id="toc-sec-user-guide" class="nav-link" data-scroll-target="#sec-user-guide">User Guide</a>
-  <ul class="collapse">
-  <li><a href="#interface-overview" id="toc-interface-overview" class="nav-link" data-scroll-target="#interface-overview"><strong>Interface Overview</strong></a></li>
-  <li><a href="#scrnaseq-atlas-integrated-spatial-atlas-explorers" id="toc-scrnaseq-atlas-integrated-spatial-atlas-explorers" class="nav-link" data-scroll-target="#scrnaseq-atlas-integrated-spatial-atlas-explorers"><strong>scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</strong></a></li>
-  <li><a href="#spatial-samples-visualizer" id="toc-spatial-samples-visualizer" class="nav-link" data-scroll-target="#spatial-samples-visualizer"><strong>Spatial Samples Visualizer</strong></a></li>
-  </ul></li>
-  <li><a href="#sec-methods" id="toc-sec-methods" class="nav-link" data-scroll-target="#sec-methods">Methods</a></li>
-  <li><a href="#sec-contact" id="toc-sec-contact" class="nav-link" data-scroll-target="#sec-contact">Contact &amp; Support</a></li>
-  </ul>
-</nav>
-</div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-</div>
-<main class="content column-page-right" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Human Pancreas Atlas Explorer</h1>
-<p class="subtitle lead">Interactive exploration of scRNAseq and spatial transcriptomics datasets</p>
-</div>
-
-
-
-<div class="quarto-title-meta column-page-right">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="study-overview" class="level2">
-<h2 class="anchored" data-anchor-id="study-overview">Study Overview</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Study Overview
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These interactive applications enable comprehensive exploration of single-cell RNA sequencing (scRNAseq) and spatial transcriptomics datasets from healthy donor pancreas and pancreatic ductal adenocarcinoma (PDAC) samples. Data are integrated from <a href="">Elhossiny et al., 2025</a>, <span class="citation" data-cites="steele2020multimodal">Steele et al. (<a href="#ref-steele2020multimodal" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="carpenter2023analysis">Carpenter et al. (<a href="#ref-carpenter2023analysis" role="doc-biblioref">2023</a>)</span>, and <span class="citation" data-cites="carpenter2024krt17high">Carpenter et al. (<a href="#ref-carpenter2024krt17high" role="doc-biblioref">2024</a>)</span> studies.</p>
-<p>The applications are built using ShinyCell2 <span class="citation" data-cites="chen2025shinycell2">(<a href="#ref-chen2025shinycell2" role="doc-biblioref">Chen et al. 2025</a>)</span> with custom modifications. Seurat objects of the integrated datasets will be available upon publication.</p>
-<p><strong>If you use these applications in your research, please cite the original studies listed above.</strong></p>
-</div>
-</div>
-</section>
-<section id="sec-applications" class="level2">
-<h2 class="anchored" data-anchor-id="sec-applications">Applications</h2>
-    <div class="card-container">
-        <a href="https://pascadimaglianolab.shinyapps.io/scRefApp/" class="card-link" target="_blank">
-            <div class="card">
-                <div class="card-image-wrapper">
-                    <img class="card-image" src="images/scRef_UMAP.jpeg" alt="scRNAseq Atlas UMAP visualization">
-                </div>
-                <div class="card-caption">
-                    <div class="card-title">scRNAseq Atlas Explorer</div>
-                    <p class="card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples with cell type annotation and gene expression visualization.</p>
-                </div>
-            </div>
-        </a>
-        <a href="https://pascadimaglianolab.shinyapps.io/spatialapp/" class="card-link" target="_blank">
-            <div class="card">
-                <div class="card-image-wrapper">
-                    <img class="card-image" src="images/spatial_sample.jpeg" alt="Spatial transcriptomics sample">
-                </div>
-                <div class="card-caption">
-                    <div class="card-title">Spatial Samples Visualizer</div>
-                    <p class="card-desc">Explore spatial transcriptomics data of 14 different samples from healthy donor pancreas and PDAC with paired H&amp;E histology images</p>
-                </div>
-            </div>
-        </a>
-        <a href="https://pascadimaglianolab.shinyapps.io/integratedspatialapp/" class="card-link" target="_blank">
-            <div class="card">
-                <div class="card-image-wrapper">
-                    <img class="card-image" src="images/spatial_UMAP.jpeg" alt="Integrated spatial atlas UMAP">
-                </div>
-                <div class="card-caption">
-                    <div class="card-title">Integrated Spatial Atlas Explorer</div>
-                    <p class="card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples with spatial domain annotation and gene expression visualization.</p>
-                </div>
-            </div>
-        </a>
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar navbar-expand-md" data-bs-theme="light" style="background-color:#ffffff;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <img src="website_logo.png" height="58" style="vertical-align: middle;" alt="Pancreas Precancer Atlas">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav nav-underline">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://sc-atlas.pancreas-precancer-atlas.com" target="_top">scRNAseq Atlas</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://spatial-atlas.pancreas-precancer-atlas.com" target="_top">Spatial Atlas</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://spatial-viz.pancreas-precancer-atlas.com" target="_top">Spatial Samples Visualizer</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item d-flex align-items-center">
+          <button id="mode" class="nav-link btn btn-link" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <i class="bi bi-sun-fill"></i>
+            <i class="bi bi-moon-stars-fill d-none"></i>
+          </button>
+        </li>
+      </ul>
     </div>
-<hr>
-</section>
-<section id="sec-user-guide" class="level2">
-<h2 class="anchored" data-anchor-id="sec-user-guide">User Guide</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Optimal Viewing
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For optimal viewing and interaction, we recommend using these applications on a desktop or laptop computer with a modern web browser.</p>
-</div>
-</div>
-<section id="interface-overview" class="level3">
-<h3 class="anchored" data-anchor-id="interface-overview"><strong>Interface Overview</strong></h3>
-<p>Each application features an interactive <strong>sidebar</strong> for customizing visualizations:</p>
-<div class="sidebar-card-grid">
-
-<div class="sidebar-card">
-  <img src="images/whattoplot.png" alt="Card 1">
-  <div class="sidebar-caption">
-    <h4 class="anchored">What to plot</h4>
-    <p>Choose visualization types and parameters</p>
   </div>
+</nav>
+
+<!-- ============================================================
+     HOME CONTENT
+     ============================================================ -->
+<div class="home-layout">
+  <div class="bslib-sidebar-layout">
+    <aside class="sidebar">
+      <div class="home-nav-item home-active" onclick="selectHomeTab(this, 'overview')">Study Overview</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'applications')">Applications</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'userguide')">User Guide</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'methods')">Methods</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'contact')">Contact</div>
+    </aside>
+
+    <div class="main flex-grow-1">
+
+      <!-- ── Overview ───────────────────────────────────────────── -->
+      <div id="panel-overview" class="tab-section">
+        <h3>Study Overview</h3>
+        <p>
+          These interactive applications enable comprehensive exploration of
+          single-cell RNA sequencing (scRNAseq) and spatial transcriptomics
+          datasets from healthy donor pancreas harboring precursor PanIN lesions and pancreatic ductal
+          adenocarcinoma (PDAC) samples. Data are integrated from the following studies:
+        </p>
+        <ol>
+          <li>
+            Elhossiny AM, Kadiyala P, ..., Carpenter ES, Frankel TL, Pasca di Magliano M.
+            <em>Asynchronous evolution of epithelium and stroma differentiates
+              precursor lesions from pancreatic cancer.</em>
+            <strong> Cancer Discovery.</strong> 2026.
+            <a href="https://doi.org/10.1158/2159-8290.CD-25-2001" target="_blank">doi: 10.1158/2159-8290.CD-25-2001</a>
+            PMID: 42165710.
+          </li>
+          <li>
+            Carpenter ES, Kadiyala P, Elhossiny AM, ..., Pasca Di Magliano M.
+            <em>KRT17<sup>high</sup>/CXCL8+ Tumor Cells Display Both Classical and Basal
+              Features and Regulate Myeloid Infiltration in the Pancreatic Cancer
+              Microenvironment.</em>
+            <strong> Clin Cancer Res.</strong> 2024 Jun 3;30(11):2497–2513.
+            <a href="https://doi.org/10.1158/1078-0432.CCR-23-1421" target="_blank">doi: 10.1158/1078-0432.CCR-23-1421</a>
+            PMID: 37851080; PMCID: PMC11024060.
+          </li>
+          <li>
+            Carpenter ES, Elhossiny AM, Kadiyala P, ..., Frankel TL, Pasca di Magliano M.
+            <em>Analysis of Donor Pancreata Defines the Transcriptomic Signature
+              and Microenvironment of Early Neoplastic Lesions.</em>
+            <strong> Cancer Discov.</strong> 2023 Jun 2;13(6):1324–1345.
+            <a href="https://doi.org/10.1158/2159-8290.CD-23-0013" target="_blank">doi: 10.1158/2159-8290.CD-23-0013</a>
+            PMID: 37021392; PMCID: PMC10236159.
+          </li>
+          <li>
+            Steele NG, Carpenter ES, Kemp SB, Sirihorachai VR, ..., Frankel TL,
+            Pasca di Magliano M.
+            <em>Multimodal Mapping of the Tumor and Peripheral Blood Immune
+              Landscape in Human Pancreatic Cancer.</em>
+            <strong> Nat Cancer.</strong> 2020 Nov;1(11):1097–1112.
+            <a href="https://doi.org/10.1038/s43018-020-00121-4" target="_blank">doi: 10.1038/s43018-020-00121-4</a>
+            PMID: 34296197; PMCID: PMC8294470.
+          </li>
+        </ol>
+
+        <div class="callout callout-note">
+          <p>
+            Seurat objects of the integrated datasets are available here:
+            <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19305449" target="_blank">
+              <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19305449
+            </a>
+          </p>
+          <p>
+            High resolution H&amp;E images can are available here:
+            <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19304282" target="_blank">
+              <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19304282
+            </a>
+          </p>
+        </div>
+
+        <div class="callout callout-important">
+          <p><strong>If you use these applications in your research, please cite
+            the original studies listed above.</strong></p>
+        </div>
+
+        <hr>
+        <h3>Sponsors</h3>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem;">
+          <img src="images/michmed.png" alt="Michigan Medicine" style="height: 100px; object-fit: contain;">
+          <img src="images/rogel_blondy_logo.png" alt="Rogel and Blondy Center for Pancreatic Cancer" style="height: 90px; object-fit: contain;">
+          <img src="images/gol_logo.webp" alt="Gift of Life Michigan" style="height: 100px; object-fit: contain;">
+          <img src="images/NIH_logo.png" alt="National Institutes of Health" style="height: 100px; object-fit: contain;">
+        </div>
+
+        <hr>
+        <p>
+          The applications are built using
+          <a href="https://github.com/SGDDNB/ShinyCell2" target="_blank">ShinyCell2</a>
+          with custom modifications.
+        </p>
+      </div>
+
+      <!-- ── Applications ───────────────────────────────────────── -->
+      <div id="panel-applications" class="tab-section d-none">
+        <h3>Applications</h3>
+        <div class="app-grid">
+          <a href="https://sc-atlas.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/scRef_UMAP.jpeg" alt="scRNAseq Atlas"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">scRNAseq Atlas</div>
+                <p class="app-card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples with cell type annotation and gene expression visualization.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://spatial-atlas.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/spatial_UMAP.jpeg" alt="Spatial Atlas"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">Spatial Atlas</div>
+                <p class="app-card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples with spatial domain annotation and gene expression visualization.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://spatial-viz.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/spatial_sample.jpeg" alt="Spatial Samples Visualizer"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">Spatial Samples Visualizer</div>
+                <p class="app-card-desc">Explore 14 spatial transcriptomics samples from healthy donor pancreas and PDAC with paired H&amp;E histology images.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── User Guide ─────────────────────────────────────────── -->
+      <div id="panel-userguide" class="tab-section d-none">
+        <div class="callout callout-warning">
+          <strong>Optimal Viewing: </strong>
+          For the best experience use a web browser on a computer or tablet.
+        </div>
+        <p>Each application features an interactive sidebar for customizing visualizations:</p>
+        <div class="sidebar-card-grid">
+          <div class="sidebar-card">
+            <img src="images/whattoplot.png" alt="What to Plot">
+            <div class="sidebar-caption"><h4>What to Plot</h4><p>Choose visualization types and parameters</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/subsetcells.png" alt="Subset Cells">
+            <div class="sidebar-caption"><h4>Subset Cells</h4><p>Filter by sample, tissue type, or cell type</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/customizeplot.png" alt="Customize Plot">
+            <div class="sidebar-caption"><h4>Customize Plot</h4><p>Adjust colors, themes, and display options</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/statstest.png" alt="Statistical Analysis">
+            <div class="sidebar-caption"><h4>Statistical Analysis</h4><p>Run KW and T-Test for genes between groups</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/saveplot.png" alt="Save Plot">
+            <div class="sidebar-caption"><h4>Save Plot</h4><p>Download visualizations as high-quality images</p></div>
+          </div>
+        </div>
+
+        <hr>
+        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+          <div style="flex: 1;">
+            <h4 style="margin-top: 0;">scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</h4>
+            <p>These applications provide comprehensive tools for integrated samples exploration.
+               Use the visualization type selector on the left sidebar to switch between plot types.</p>
+          </div>
+          <div style="flex: 0 0 auto;">
+            <img src="images/viz_type.png" alt="Visualization type selector"
+                 style="max-width: 220px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
+          </div>
+        </div>
+
+        <div class="accordion" id="scref_accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p1" aria-expanded="true" aria-controls="scref_p1">
+                UMAP (with Zoom)
+              </button>
+            </h2>
+            <div id="scref_p1" class="accordion-collapse collapse show" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Interactive UMAP with zoom functionality to visualize cell types and gene expression patterns at multiple scales.</p>
+                <div class="img-center"><img src="images/UMAP_w_Zoom.png" alt="UMAP with Zoom"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p2" aria-expanded="false" aria-controls="scref_p2">
+                UMAP (Side-by-Side)
+              </button>
+            </h2>
+            <div id="scref_p2" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Simultaneous visualization of two genes or gene expression alongside cell type annotations for comparative analysis.</p>
+                <div class="img-center"><img src="images/UMAP_side_by_side.png" alt="UMAP side-by-side"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p3" aria-expanded="false" aria-controls="scref_p3">
+                Single Gene Expression
+              </button>
+            </h2>
+            <div id="scref_p3" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Violin and box plots showing gene expression across cell types and spatial domains, with built-in statistical testing.</p>
+                <div class="img-center"><img src="images/SingleGene_Exp.png" alt="Single gene expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p4" aria-expanded="false" aria-controls="scref_p4">
+                Multiple Gene Expression
+              </button>
+            </h2>
+            <div id="scref_p4" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Comparative visualization of expression patterns for multiple genes of interest simultaneously.</p>
+                <div class="img-center"><img src="images/MultiGene_Exp.png" alt="Multiple gene expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p5" aria-expanded="false" aria-controls="scref_p5">
+                Gene Co-expression
+              </button>
+            </h2>
+            <div id="scref_p5" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Simultaneous visualization of two-gene co-expression patterns on UMAP representations.</p>
+                <div class="img-center"><img src="images/Gene_CoExp.png" alt="Gene co-expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p6" aria-expanded="false" aria-controls="scref_p6">
+                Proportion Histogram
+              </button>
+            </h2>
+            <div id="scref_p6" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Analysis of cell type proportions across different sample groups and conditions.</p>
+                <div class="img-center"><img src="images/PropHist.png" alt="Proportion histogram"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <h4>Spatial Samples Visualizer</h4>
+        <p>Detailed exploration of individual spatial transcriptomics samples with corresponding H&amp;E visualization. Full resolution images are available
+          <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19304282" target="_blank">
+            <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19304282
+          </a>.
+        </p>
+        <div class="accordion" id="spatial_accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#spatial_p1" aria-expanded="true" aria-controls="spatial_p1">
+                Cell Type Enrichment
+              </button>
+            </h2>
+            <div id="spatial_p1" class="accordion-collapse collapse show" data-bs-parent="#spatial_accordion">
+              <div class="accordion-body">
+                <p>Spatial mapping of cell type composition based on deconvolution results.</p>
+                <div class="img-center"><img src="images/GeneVFraction.png" alt="Cell type enrichment"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spatial_p2" aria-expanded="false" aria-controls="spatial_p2">
+                Spatial Domains
+              </button>
+            </h2>
+            <div id="spatial_p2" class="accordion-collapse collapse" data-bs-parent="#spatial_accordion">
+              <div class="accordion-body">
+                <p>Visualization of defined tissue regions and microenvironments.</p>
+                <div class="img-center"><img src="images/GeneVSpatialDomain.png" alt="Spatial domains"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Methods ────────────────────────────────────────────── -->
+      <div id="panel-methods" class="tab-section d-none">
+        <h3>Methods</h3>
+        <p>Data processing and analysis methods are described in detail in this
+           publication. All analysis code and pipelines are publicly available
+           <a href="https://pascadimagliano-lab.github.io/PancAtlas_Methods/" target="_blank">here</a>.</p>
+        <hr>
+        <p>
+          The applications are built using
+          <a href="https://github.com/SGDDNB/ShinyCell2" target="_blank">ShinyCell2</a>
+          with custom modifications.
+        </p>
+      </div>
+
+      <!-- ── Contact ────────────────────────────────────────────── -->
+      <div id="panel-contact" class="tab-section d-none">
+        <h3>Contact</h3>
+        <p><strong>For questions, feedback, or collaboration inquiries:</strong></p>
+        <ul>
+          <li><strong>Ahmed M. Elhossiny, PhD</strong> &mdash; Study Author
+            (<a href="mailto:hossiny@umich.edu">hossiny@umich.edu</a>)</li>
+          <li><strong>Marina Pasca di Magliano, PhD</strong> &mdash; Principal Investigator
+            (<a href="mailto:marinapa@umich.edu">marinapa@umich.edu</a>)</li>
+        </ul>
+      </div>
+
+    </div><!-- /.main -->
+  </div><!-- /.bslib-sidebar-layout -->
+</div><!-- /.home-layout -->
+
+<!-- Footer -->
+<div class="home-footer">
+  <p>Developed by the Pasca di Magliano Laboratory &bull; University of Michigan</p>
 </div>
 
-<div class="sidebar-card">
-  <img src="images/subsetcells.png" alt="Card 2">
-  <div class="sidebar-caption">
-    <h4 class="anchored">Subset Cells</h4>
-    <p>Filter by sample, tissue type, or cell type</p>
-  </div>
-</div>
-
-<div class="sidebar-card">
-  <img src="images/customizeplot.png" alt="Card 3">
-  <div class="sidebar-caption">
-    <h4 class="anchored">Customize Plot</h4>
-    <p>Adjust colors, themes, and display options</p>
-  </div>
-</div>
-
-<div class="sidebar-card">
-  <img src="images/statstest.png" alt="Card 4">
-  <div class="sidebar-caption">
-    <h4 class="anchored">Statistical Analysis</h4>
-    <p>Run KW and T-Test for genes between groups</p>
-  </div>
-</div>
-
-<div class="sidebar-card">
-  <img src="images/saveplot.png" alt="Card 5">
-  <div class="sidebar-caption">
-    <h4 class="anchored">Save Plot</h4>
-    <p>Download your visualizations as high-quality images</p>
-  </div>
-</div>
-
-</div>
-</section>
-<section id="scrnaseq-atlas-integrated-spatial-atlas-explorers" class="level3">
-<h3 class="anchored" data-anchor-id="scrnaseq-atlas-integrated-spatial-atlas-explorers"><strong>scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</strong></h3>
-<p>These applications provide comprehensive tools for integrated dataset exploration:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">UMAP (with Zoom)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">UMAP (Side-by-Side)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Single Gene Expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Multiple Gene Expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Gene Co-expression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Proportion Histogram</a></li></ul>
-<div class="tab-content nav-pills">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Interactive UMAP representation with zoom functionality to visualize cell types and gene expression patterns at multiple scales.</p>
-<div class="img-center">
-<p><img src="images/UMAP_w_Zoom.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Simultaneous visualization of two genes or gene expression alongside cell type annotations for comparative analysis.</p>
-<div class="img-center">
-<p><img src="images/UMAP_side_by_side.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p>Violin plots and box plots showing gene expression across cell types and spatial domains, with built-in statistical testing capabilities.</p>
-<div class="img-center">
-<p><img src="images/SingleGene_Exp.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p>Comparative visualization of expression patterns for multiple genes of interest.</p>
-<div class="img-center">
-<p><img src="images/MultiGene_Exp.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<p>Simultaneous visualization of two-gene co-expression patterns on UMAP representations.</p>
-<div class="img-center">
-<p><img src="images/Gene_CoExp.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<p>Analysis of cell type proportions across different sample groups and conditions.</p>
-<div class="img-center">
-<p><img src="images/PropHist.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="spatial-samples-visualizer" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-samples-visualizer"><strong>Spatial Samples Visualizer</strong></h3>
-<p>This application enables detailed exploration of individual spatial transcriptomics samples with corresponding H&amp;E Visualization, Full resolution images will be available upon publication.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Cell Type Enrichment</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Spatial Domains</a></li></ul>
-<div class="tab-content nav-pills">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>Spatial mapping based on deconvolution results.</p>
-<div class="img-center">
-<p><img src="images/GeneVFraction.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p>Visualization of defined tissue regions and microenvironments.</p>
-<div class="img-center">
-<p><img src="images/GeneVSpatialDomain.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="sec-methods" class="level2">
-<h2 class="anchored" data-anchor-id="sec-methods">Methods</h2>
-<p>Data processing and analysis methods will be available upon publication. All analysis code and pipelines are publicly available in our <a href="https://pascadimagliano-lab.github.io/PancAtlas_Methods/">GitHub repository</a>.</p>
-<hr>
-</section>
-<section id="sec-contact" class="level2">
-<h2 class="anchored" data-anchor-id="sec-contact">Contact &amp; Support</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Get in Touch
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For questions, feedback, or collaboration inquiries, please contact:</p>
-<ul>
-<li><p><strong>Ahmed M. Elhossiny, PhD</strong> Study Author <a href="mailto:hossiny@umich.edu">hossiny@umich.edu</a></p></li>
-<li><p><strong>Marina Pasca di Magliano, PhD</strong> Principal Investigator <a href="mailto:marinapa@umich.edu">marinapa@umich.edu</a></p></li>
-</ul>
-</div>
-</div>
-<hr>
-<div class="footer">
-<p><em>Developed by the Pasca di Magliano Laboratory | University of Michigan</em></p>
-</div>
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-carpenter2023analysis" class="csl-entry" role="listitem">
-Carpenter, Eileen S, Ahmed M Elhossiny, Padma Kadiyala, Jay Li, Jake McGue, Brian D Griffith, Yaqing Zhang, et al. 2023. <span>“Analysis of Donor Pancreata Defines the Transcriptomic Signature and Microenvironment of Early Neoplastic Lesions.”</span> <em>Cancer Discovery</em> 13 (6): 1324–45.
-</div>
-<div id="ref-carpenter2024krt17high" class="csl-entry" role="listitem">
-Carpenter, Eileen S, Padma Kadiyala, Ahmed M Elhossiny, Samantha B Kemp, Jay Li, Nina G Steele, Rémy Nicolle, et al. 2024. <span>“KRT17High/CXCL8+ Tumor Cells Display Both Classical and Basal Features and Regulate Myeloid Infiltration in the Pancreatic Cancer Microenvironment.”</span> <em>Clinical Cancer Research</em> 30 (11): 2497–2513.
-</div>
-<div id="ref-chen2025shinycell2" class="csl-entry" role="listitem">
-Chen, Bei Jun, Yi Yang Lim, Xinyi Yang, Lijin Wang, Owen JL Rackham, and John F Ouyang. 2025. <span>“ShinyCell2: An Extended Library for Simple and Sharable Visualisation of Spatial, Peak-Based and Multi-Omic Single-Cell Data.”</span> <em>bioRxiv</em>, 2025–04.
-</div>
-<div id="ref-steele2020multimodal" class="csl-entry" role="listitem">
-Steele, Nina G, Eileen S Carpenter, Samantha B Kemp, Veerin R Sirihorachai, Stephanie The, Lawrence Delrosario, Jenny Lazarus, et al. 2020. <span>“Multimodal Mapping of the Tumor and Peripheral Blood Immune Landscape in Human Pancreatic Cancer.”</span> <em>Nature Cancer</em> 1 (11): 1097–1112.
-</div>
-</div></section></div></main>
-<!-- /main column -->
-<script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
-        }
-        return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Home sidebar tab switching ───────────────────────────────
+  function selectHomeTab(btn, value) {
+    document.querySelectorAll('.home-nav-item').forEach(function (el) {
+      el.classList.remove('home-active');
     });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
-    }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
-      } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
-      }
-    }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
-          }
-        } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
-            if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
-      } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
-        });
-      }
-    }
-  });
-  </script>
-</div> <!-- /content -->
+    btn.classList.add('home-active');
 
+    document.querySelectorAll('.main > .tab-section').forEach(function (el) {
+      el.classList.add('d-none');
+    });
+    document.getElementById('panel-' + value).classList.remove('d-none');
+  }
 
+  // ── Dark mode toggle (mirrors bslib's input_dark_mode) ───────
+  (function () {
+    var modeBtn   = document.getElementById('mode');
+    var sunIcon   = modeBtn.querySelector('.bi-sun-fill');
+    var moonIcon  = modeBtn.querySelector('.bi-moon-stars-fill');
 
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      sunIcon.classList.toggle('d-none', theme === 'dark');
+      moonIcon.classList.toggle('d-none', theme !== 'dark');
+    }
 
-<script src="index_files/libs/quarto-html/zenscroll-min.js"></script>
-</body></html>
+    var preferred = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(preferred);
+
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+  })();
+</script>
+</body>
+</html>
