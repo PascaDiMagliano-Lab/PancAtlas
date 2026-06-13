@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pancreas Precancer Atlas</title>
+<link rel="icon" type="image/png" href="panc_logo.png">
+
+<!-- Bootswatch "Yeti" (Bootstrap 5) to match the bslib bs_theme used by the Shiny apps -->
+<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/yeti/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="overrides.css">
+<link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar navbar-expand-md" data-bs-theme="light" style="background-color:#ffffff;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <img src="website_logo.png" height="58" style="vertical-align: middle;" alt="Pancreas Precancer Atlas">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav nav-underline">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://sc-atlas.pancreas-precancer-atlas.com" target="_top">scRNAseq Atlas</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://spatial-atlas.pancreas-precancer-atlas.com" target="_top">Spatial Atlas</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://spatial-viz.pancreas-precancer-atlas.com" target="_top">Spatial Samples Visualizer</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item d-flex align-items-center">
+          <button id="mode" class="nav-link btn btn-link" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <i class="bi bi-sun-fill"></i>
+            <i class="bi bi-moon-stars-fill d-none"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HOME CONTENT
+     ============================================================ -->
+<div class="home-layout">
+  <div class="bslib-sidebar-layout">
+    <aside class="sidebar">
+      <div class="home-nav-item home-active" onclick="selectHomeTab(this, 'overview')">Study Overview</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'applications')">Applications</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'userguide')">User Guide</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'methods')">Methods</div>
+      <div class="home-nav-item" onclick="selectHomeTab(this, 'contact')">Contact</div>
+    </aside>
+
+    <div class="main flex-grow-1">
+
+      <!-- ── Overview ───────────────────────────────────────────── -->
+      <div id="panel-overview" class="tab-section">
+        <h3>Study Overview</h3>
+        <p>
+          These interactive applications enable comprehensive exploration of
+          single-cell RNA sequencing (scRNAseq) and spatial transcriptomics
+          datasets from healthy donor pancreas harboring precursor PanIN lesions and pancreatic ductal
+          adenocarcinoma (PDAC) samples. Data are integrated from the following studies:
+        </p>
+        <ol>
+          <li>
+            Elhossiny AM, Kadiyala P, ..., Carpenter ES, Frankel TL, Pasca di Magliano M.
+            <em>Asynchronous evolution of epithelium and stroma differentiates
+              precursor lesions from pancreatic cancer.</em>
+            <strong> Cancer Discovery.</strong> 2026.
+            <a href="https://doi.org/10.1158/2159-8290.CD-25-2001" target="_blank">doi: 10.1158/2159-8290.CD-25-2001</a>
+            PMID: 42165710.
+          </li>
+          <li>
+            Carpenter ES, Kadiyala P, Elhossiny AM, ..., Pasca Di Magliano M.
+            <em>KRT17<sup>high</sup>/CXCL8+ Tumor Cells Display Both Classical and Basal
+              Features and Regulate Myeloid Infiltration in the Pancreatic Cancer
+              Microenvironment.</em>
+            <strong> Clin Cancer Res.</strong> 2024 Jun 3;30(11):2497–2513.
+            <a href="https://doi.org/10.1158/1078-0432.CCR-23-1421" target="_blank">doi: 10.1158/1078-0432.CCR-23-1421</a>
+            PMID: 37851080; PMCID: PMC11024060.
+          </li>
+          <li>
+            Carpenter ES, Elhossiny AM, Kadiyala P, ..., Frankel TL, Pasca di Magliano M.
+            <em>Analysis of Donor Pancreata Defines the Transcriptomic Signature
+              and Microenvironment of Early Neoplastic Lesions.</em>
+            <strong> Cancer Discov.</strong> 2023 Jun 2;13(6):1324–1345.
+            <a href="https://doi.org/10.1158/2159-8290.CD-23-0013" target="_blank">doi: 10.1158/2159-8290.CD-23-0013</a>
+            PMID: 37021392; PMCID: PMC10236159.
+          </li>
+          <li>
+            Steele NG, Carpenter ES, Kemp SB, Sirihorachai VR, ..., Frankel TL,
+            Pasca di Magliano M.
+            <em>Multimodal Mapping of the Tumor and Peripheral Blood Immune
+              Landscape in Human Pancreatic Cancer.</em>
+            <strong> Nat Cancer.</strong> 2020 Nov;1(11):1097–1112.
+            <a href="https://doi.org/10.1038/s43018-020-00121-4" target="_blank">doi: 10.1038/s43018-020-00121-4</a>
+            PMID: 34296197; PMCID: PMC8294470.
+          </li>
+        </ol>
+
+        <div class="callout callout-note">
+          <p>
+            Seurat objects of the integrated datasets are available here:
+            <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19305449" target="_blank">
+              <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19305449
+            </a>
+          </p>
+          <p>
+            High resolution H&amp;E images can are available here:
+            <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19304282" target="_blank">
+              <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19304282
+            </a>
+          </p>
+        </div>
+
+        <div class="callout callout-important">
+          <p><strong>If you use these applications in your research, please cite
+            the original studies listed above.</strong></p>
+        </div>
+
+        <hr>
+        <h3>Sponsors</h3>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem;">
+          <img src="images/michmed.png" alt="Michigan Medicine" style="height: 100px; object-fit: contain;">
+          <img src="images/rogel_blondy_logo.png" alt="Rogel and Blondy Center for Pancreatic Cancer" style="height: 90px; object-fit: contain;">
+          <img src="images/gol_logo.webp" alt="Gift of Life Michigan" style="height: 100px; object-fit: contain;">
+          <img src="images/NIH_logo.png" alt="National Institutes of Health" style="height: 100px; object-fit: contain;">
+        </div>
+
+        <hr>
+        <p>
+          The applications are built using
+          <a href="https://github.com/SGDDNB/ShinyCell2" target="_blank">ShinyCell2</a>
+          with custom modifications.
+        </p>
+      </div>
+
+      <!-- ── Applications ───────────────────────────────────────── -->
+      <div id="panel-applications" class="tab-section d-none">
+        <h3>Applications</h3>
+        <div class="app-grid">
+          <a href="https://sc-atlas.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/scRef_UMAP.jpeg" alt="scRNAseq Atlas"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">scRNAseq Atlas</div>
+                <p class="app-card-desc">Explore ~200,000 cells from healthy donor pancreas and PDAC samples with cell type annotation and gene expression visualization.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://spatial-atlas.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/spatial_UMAP.jpeg" alt="Spatial Atlas"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">Spatial Atlas</div>
+                <p class="app-card-desc">Explore ~160,000 Visium spots across healthy donor and PDAC spatial samples with spatial domain annotation and gene expression visualization.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://spatial-viz.pancreas-precancer-atlas.com" target="_blank" class="app-card-link">
+            <div class="app-card">
+              <div class="app-card-image"><img src="images/spatial_sample.jpeg" alt="Spatial Samples Visualizer"></div>
+              <div class="app-card-body">
+                <div class="app-card-title">Spatial Samples Visualizer</div>
+                <p class="app-card-desc">Explore 14 spatial transcriptomics samples from healthy donor pancreas and PDAC with paired H&amp;E histology images.</p>
+                <div class="app-launch-btn">Open App &rarr;</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── User Guide ─────────────────────────────────────────── -->
+      <div id="panel-userguide" class="tab-section d-none">
+        <div class="callout callout-warning">
+          <strong>Optimal Viewing: </strong>
+          For the best experience use a web browser on a computer or tablet.
+        </div>
+        <p>Each application features an interactive sidebar for customizing visualizations:</p>
+        <div class="sidebar-card-grid">
+          <div class="sidebar-card">
+            <img src="images/whattoplot.png" alt="What to Plot">
+            <div class="sidebar-caption"><h4>What to Plot</h4><p>Choose visualization types and parameters</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/subsetcells.png" alt="Subset Cells">
+            <div class="sidebar-caption"><h4>Subset Cells</h4><p>Filter by sample, tissue type, or cell type</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/customizeplot.png" alt="Customize Plot">
+            <div class="sidebar-caption"><h4>Customize Plot</h4><p>Adjust colors, themes, and display options</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/statstest.png" alt="Statistical Analysis">
+            <div class="sidebar-caption"><h4>Statistical Analysis</h4><p>Run KW and T-Test for genes between groups</p></div>
+          </div>
+          <div class="sidebar-card">
+            <img src="images/saveplot.png" alt="Save Plot">
+            <div class="sidebar-caption"><h4>Save Plot</h4><p>Download visualizations as high-quality images</p></div>
+          </div>
+        </div>
+
+        <hr>
+        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+          <div style="flex: 1;">
+            <h4 style="margin-top: 0;">scRNAseq Atlas &amp; Integrated Spatial Atlas Explorers</h4>
+            <p>These applications provide comprehensive tools for integrated samples exploration.
+               Use the visualization type selector on the left sidebar to switch between plot types.</p>
+          </div>
+          <div style="flex: 0 0 auto;">
+            <img src="images/viz_type.png" alt="Visualization type selector"
+                 style="max-width: 220px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
+          </div>
+        </div>
+
+        <div class="accordion" id="scref_accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p1" aria-expanded="true" aria-controls="scref_p1">
+                UMAP (with Zoom)
+              </button>
+            </h2>
+            <div id="scref_p1" class="accordion-collapse collapse show" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Interactive UMAP with zoom functionality to visualize cell types and gene expression patterns at multiple scales.</p>
+                <div class="img-center"><img src="images/UMAP_w_Zoom.png" alt="UMAP with Zoom"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p2" aria-expanded="false" aria-controls="scref_p2">
+                UMAP (Side-by-Side)
+              </button>
+            </h2>
+            <div id="scref_p2" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Simultaneous visualization of two genes or gene expression alongside cell type annotations for comparative analysis.</p>
+                <div class="img-center"><img src="images/UMAP_side_by_side.png" alt="UMAP side-by-side"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p3" aria-expanded="false" aria-controls="scref_p3">
+                Single Gene Expression
+              </button>
+            </h2>
+            <div id="scref_p3" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Violin and box plots showing gene expression across cell types and spatial domains, with built-in statistical testing.</p>
+                <div class="img-center"><img src="images/SingleGene_Exp.png" alt="Single gene expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p4" aria-expanded="false" aria-controls="scref_p4">
+                Multiple Gene Expression
+              </button>
+            </h2>
+            <div id="scref_p4" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Comparative visualization of expression patterns for multiple genes of interest simultaneously.</p>
+                <div class="img-center"><img src="images/MultiGene_Exp.png" alt="Multiple gene expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p5" aria-expanded="false" aria-controls="scref_p5">
+                Gene Co-expression
+              </button>
+            </h2>
+            <div id="scref_p5" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Simultaneous visualization of two-gene co-expression patterns on UMAP representations.</p>
+                <div class="img-center"><img src="images/Gene_CoExp.png" alt="Gene co-expression"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scref_p6" aria-expanded="false" aria-controls="scref_p6">
+                Proportion Histogram
+              </button>
+            </h2>
+            <div id="scref_p6" class="accordion-collapse collapse" data-bs-parent="#scref_accordion">
+              <div class="accordion-body">
+                <p>Analysis of cell type proportions across different sample groups and conditions.</p>
+                <div class="img-center"><img src="images/PropHist.png" alt="Proportion histogram"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <h4>Spatial Samples Visualizer</h4>
+        <p>Detailed exploration of individual spatial transcriptomics samples with corresponding H&amp;E visualization. Full resolution images are available
+          <a class="doi-badge" href="https://doi.org/10.5281/zenodo.19304282" target="_blank">
+            <i class="bi bi-box-arrow-up-right"></i> 10.5281/zenodo.19304282
+          </a>.
+        </p>
+        <div class="accordion" id="spatial_accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#spatial_p1" aria-expanded="true" aria-controls="spatial_p1">
+                Cell Type Enrichment
+              </button>
+            </h2>
+            <div id="spatial_p1" class="accordion-collapse collapse show" data-bs-parent="#spatial_accordion">
+              <div class="accordion-body">
+                <p>Spatial mapping of cell type composition based on deconvolution results.</p>
+                <div class="img-center"><img src="images/GeneVFraction.png" alt="Cell type enrichment"></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spatial_p2" aria-expanded="false" aria-controls="spatial_p2">
+                Spatial Domains
+              </button>
+            </h2>
+            <div id="spatial_p2" class="accordion-collapse collapse" data-bs-parent="#spatial_accordion">
+              <div class="accordion-body">
+                <p>Visualization of defined tissue regions and microenvironments.</p>
+                <div class="img-center"><img src="images/GeneVSpatialDomain.png" alt="Spatial domains"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Methods ────────────────────────────────────────────── -->
+      <div id="panel-methods" class="tab-section d-none">
+        <h3>Methods</h3>
+        <p>Data processing and analysis methods are described in detail in this
+           publication. All analysis code and pipelines are publicly available
+           <a href="https://pascadimagliano-lab.github.io/PancAtlas_Methods/" target="_blank">here</a>.</p>
+        <hr>
+        <p>
+          The applications are built using
+          <a href="https://github.com/SGDDNB/ShinyCell2" target="_blank">ShinyCell2</a>
+          with custom modifications.
+        </p>
+      </div>
+
+      <!-- ── Contact ────────────────────────────────────────────── -->
+      <div id="panel-contact" class="tab-section d-none">
+        <h3>Contact</h3>
+        <p><strong>For questions, feedback, or collaboration inquiries:</strong></p>
+        <ul>
+          <li><strong>Ahmed M. Elhossiny, PhD</strong> &mdash; Study Author
+            (<a href="mailto:hossiny@umich.edu">hossiny@umich.edu</a>)</li>
+          <li><strong>Marina Pasca di Magliano, PhD</strong> &mdash; Principal Investigator
+            (<a href="mailto:marinapa@umich.edu">marinapa@umich.edu</a>)</li>
+        </ul>
+      </div>
+
+    </div><!-- /.main -->
+  </div><!-- /.bslib-sidebar-layout -->
+</div><!-- /.home-layout -->
+
+<!-- Footer -->
+<div class="home-footer">
+  <p>Developed by the Pasca di Magliano Laboratory &bull; University of Michigan</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Home sidebar tab switching ───────────────────────────────
+  function selectHomeTab(btn, value) {
+    document.querySelectorAll('.home-nav-item').forEach(function (el) {
+      el.classList.remove('home-active');
+    });
+    btn.classList.add('home-active');
+
+    document.querySelectorAll('.main > .tab-section').forEach(function (el) {
+      el.classList.add('d-none');
+    });
+    document.getElementById('panel-' + value).classList.remove('d-none');
+  }
+
+  // ── Dark mode toggle (mirrors bslib's input_dark_mode) ───────
+  (function () {
+    var modeBtn   = document.getElementById('mode');
+    var sunIcon   = modeBtn.querySelector('.bi-sun-fill');
+    var moonIcon  = modeBtn.querySelector('.bi-moon-stars-fill');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      sunIcon.classList.toggle('d-none', theme === 'dark');
+      moonIcon.classList.toggle('d-none', theme !== 'dark');
+    }
+
+    var preferred = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(preferred);
+
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+  })();
+</script>
+</body>
+</html>

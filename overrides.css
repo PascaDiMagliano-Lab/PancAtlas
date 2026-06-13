@@ -1,0 +1,143 @@
+/* ============================================================
+   overrides.css — adapts the Bootswatch "Yeti" theme to match
+   the bslib bs_theme(bootswatch = "yeti", primary = "#9B7FD4",
+   "navbar-bg" = "#ffffff") used by the original Shiny home page.
+   ============================================================ */
+
+:root {
+    --bs-primary: #9B7FD4;
+    --bs-primary-rgb: 155, 127, 212;
+    --bs-link-color: #9B7FD4;
+    --bs-link-color-rgb: 155, 127, 212;
+    --bs-link-hover-color: #7a5cb8;
+    --bs-link-hover-color-rgb: 122, 92, 184;
+}
+
+.btn-primary {
+    --bs-btn-bg: #9B7FD4;
+    --bs-btn-border-color: #9B7FD4;
+    --bs-btn-hover-bg: #8a6bc9;
+    --bs-btn-hover-border-color: #8a6bc9;
+    --bs-btn-active-bg: #8a6bc9;
+    --bs-btn-active-border-color: #8a6bc9;
+}
+
+.accordion {
+    --bs-accordion-active-bg: rgba(155, 127, 212, 0.12);
+    --bs-accordion-active-color: #6c4fb0;
+    --bs-accordion-btn-focus-border-color: #9B7FD4;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(155, 127, 212, 0.25);
+}
+
+[data-bs-theme="dark"] .accordion {
+    --bs-accordion-active-bg: rgba(155, 127, 212, 0.2);
+    --bs-accordion-active-color: #c4aff0;
+}
+
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid var(--bs-border-color-translucent);
+}
+
+/* bslib renders the navbar title as a plain <span class="navbar-brand">
+   (no link padding); match that so the navbar height/logo position lines
+   up with the Shiny apps' navbars. */
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#mode {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--bs-body-color);
+    border: none;
+}
+
+#mode:hover {
+    color: #9B7FD4;
+}
+
+/* ---- Page fill: lets the bordered sidebar box stretch to the full
+   viewport height (minus navbar/footer) just like bslib's fillable
+   page_navbar(), so the sidebar's shaded background is "fixed" height
+   instead of shrinking to whatever the active tab's content needs. ---- */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ---- Home layout (replicates bslib layout_sidebar(width = 200)) ----
+   bslib's page_navbar(padding = 0) leaves no horizontal gutter, so
+   .home-layout spans the full viewport width edge-to-edge, same as
+   the Shiny app. */
+.home-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+/* bslib renders layout_sidebar() as a bordered grid box: a shaded
+   sidebar column + main column, both stretching to the box's height. */
+.bslib-sidebar-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border: 1px solid rgba(0, 0, 0, 0.176);
+    flex: 1 0 auto;
+}
+
+[data-bs-theme="dark"] .bslib-sidebar-layout {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.bslib-sidebar-layout > .sidebar {
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.176);
+    padding: 1rem 0.75rem;
+}
+
+[data-bs-theme="dark"] .bslib-sidebar-layout > .sidebar {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-right-color: rgba(255, 255, 255, 0.15);
+}
+
+.bslib-sidebar-layout > .main {
+    min-width: 0;
+    padding: 16px;
+}
+
+@media (max-width: 768px) {
+    .bslib-sidebar-layout {
+        grid-template-columns: 1fr;
+        flex: 0 0 auto;
+    }
+
+    .bslib-sidebar-layout > .sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-content: start;
+        gap: 0.4rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.176);
+    }
+
+    .bslib-sidebar-layout > .sidebar .home-nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    [data-bs-theme="dark"] .bslib-sidebar-layout > .sidebar {
+        border-bottom-color: rgba(255, 255, 255, 0.15);
+    }
+}

@@ -1,0 +1,604 @@
+/* ============================================================
+   home.css — Home page styles for the Pancreas Atlas Shiny App
+   ============================================================
+   Loaded via tags$head(tags$link(...)) in app.R.
+   Shiny automatically serves everything in the www/ folder at the
+   app root URL, so href="home.css" resolves correctly.
+
+   Sections:
+     1. Fonts & Base
+     2. Banner
+     3. Stats Strip
+     4. Home Content & Tab Sections
+     5. Callouts
+     6. App Cards
+     7. Feature / Sidebar Cards
+     8. Image Display
+     9. Footer
+    10. Responsive breakpoints
+    11. Dark mode overrides
+   ============================================================ */
+
+/* ---- -1. Custom Topbar & Nav Button Group -------------------
+   Replaces page_navbar() with a fixed-position custom header.
+   Height is 54px — matches the top value used in the sticky
+   sidebar rule below.
+   ------------------------------------------------------------ */
+.custom-topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1030;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.25rem;
+    background: #9B7FD4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+.topbar-brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* The pill-group container */
+.nav-btn-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 3px;
+    flex: 1;
+}
+
+/* Individual pill button */
+.nav-btn {
+    padding: 0.3rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    transition: background 0.15s ease, color 0.15s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.nav-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-btn.nav-btn-active {
+    background: white;
+    color: #9B7FD4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode toggle pushed to the right */
+.topbar-right {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Offset all page content below the fixed topbar */
+.main-content {
+    margin-top: 54px;
+}
+
+/* ---- 0. Fixed sidebar ----------------------------------------
+   Applied to sub-app sidebars only (scRef, integratedSpatial, spatial).
+   The .home-layout wrapper excludes the home page nav sidebar from
+   these rules so its nav items remain visible and unstyled.
+   ------------------------------------------------------------ */
+.bslib-sidebar-layout > .sidebar {
+    position: sticky;
+    top: 54px;
+    height: calc(100vh - 54px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Reset for the home page sidebar — let it size naturally */
+.home-layout .bslib-sidebar-layout > .sidebar {
+    position: static;
+    height: auto;
+    overflow: visible;
+}
+
+/* ---- Page navbar pill tabs ---------------------------------- */
+.navbar-nav .nav-link {
+    border-radius: 8px;
+    padding: 0.35rem 0.9rem !important;
+    margin: 0 2px;
+    font-weight: 500;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.navbar-nav .nav-link:not(.active):hover {
+    background: rgba(155, 127, 212, 0.08);
+    color: #9B7FD4 !important;
+}
+
+.navbar-nav .nav-link.active {
+    background: rgba(155, 127, 212, 0.15) !important;
+    color: #7a5cb8 !important;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+html[data-bs-theme="dark"] .navbar,
+html[data-bs-theme="dark"] .navbar-expand-md,
+html[data-bs-theme="dark"] nav.navbar {
+    background-color: #343a40 !important;
+    border-bottom: 1px solid #4a5056;
+}
+
+html[data-bs-theme="dark"] .navbar-nav .nav-link:not(.active):hover {
+    background: rgba(155, 127, 212, 0.14);
+    color: #c4aff0 !important;
+}
+
+html[data-bs-theme="dark"] .navbar-nav .nav-link.active {
+    background: rgba(155, 127, 212, 0.25) !important;
+    color: #c4aff0 !important;
+}
+
+/* ---- 1. Fonts & Base ---------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.home-banner,
+.home-content,
+.home-footer,
+.stats-strip {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---- 2. Banner ---------------------------------------------- */
+/*
+   Full-width gradient header rendered at the top of the Home tab.
+   border-radius on the bottom corners gives it a "card" feel.
+*/
+.home-banner {
+    background: linear-gradient(135deg, #9B7FD4 0%, #B49DE0 100%);
+    color: white;
+    text-align: center;
+    padding: 52px 20px 44px;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    margin-bottom: 0;
+}
+
+.home-banner h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white !important;
+    margin: 0;
+    border-bottom: none !important;   /* override bslib h2 rule */
+    padding-bottom: 0 !important;
+}
+
+.home-banner p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.05rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+}
+
+/* ---- 3. Stats Strip ----------------------------------------- */
+/*
+   Four stat cards displayed in a horizontal row below the banner.
+   flex-wrap allows them to stack on small screens.
+*/
+.stats-strip {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.75rem 1rem 1.25rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    min-width: 120px;
+    flex: 1;
+    max-width: 170px;
+}
+
+.stat-number {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #9B7FD4;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--bs-secondary-color);
+    margin-top: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ---- 4. Home Sidebar Navigation ----------------------------- */
+/*
+   Styled nav items inside the fixed layout_sidebar() on the home page.
+   Replaces the old navset_pill_list Bootstrap-grid approach with a
+   truly fixed-width sidebar via layout_sidebar(width = 200).
+*/
+.home-nav-item {
+    display: block;
+    padding: 0.45rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--bs-body-color);
+    transition: background 0.15s ease, color 0.15s ease;
+    user-select: none;
+    margin-bottom: 2px;
+}
+
+.home-nav-item:hover {
+    background: rgba(var(--bs-primary-rgb), 0.08);
+    color: var(--bs-primary);
+}
+
+.home-nav-item.home-active {
+    background: var(--bs-primary);
+    color: white;
+}
+
+/* ---- 4b. Home Content & Tab Sections ------------------------- */
+/*
+   .home-content wraps the navset_pill_list.
+   max-width + auto margins keep it from stretching too wide on
+   large monitors.
+*/
+.home-content {
+    padding: 1.25rem 1.5rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/*
+   .tab-section gives consistent padding inside every nav_panel.
+   Applied to the div() wrapping each panel's content in app.R.
+*/
+.tab-section {
+    padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.tab-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #9B7FD4;
+    border-bottom: 1px solid var(--bs-border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.tab-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #9B7FD4;
+    margin-top: 1.75rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Pill-list nav items: tighten default spacing */
+.nav-pills .nav-link {
+    font-size: 0.9rem;
+    padding: 0.45rem 1rem;
+    border-radius: 0.5rem;
+}
+
+/* ---- 5. Callouts -------------------------------------------- */
+/*
+   Custom callout boxes (note / warning / important).
+   These mimic Quarto callouts but are plain HTML divs in Shiny.
+*/
+.callout {
+    border-left: 5px solid;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    line-height: 1.65;
+}
+
+.callout p:last-child { margin-bottom: 0; }
+
+.callout-note {
+    border-color: #4472C4;
+    background: rgba(68, 114, 196, 0.06);
+}
+
+.callout-warning {
+    border-color: #E6A817;
+    background: rgba(230, 168, 23, 0.07);
+}
+
+.callout-important {
+    border-color: #C0392B;
+    background: rgba(192, 57, 43, 0.05);
+}
+
+/* ---- 6. App Cards ------------------------------------------- */
+/*
+   Three-column card grid for the Applications tab.
+   Each card is a clickable anchor that opens an external app.
+*/
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 1.25rem 0 0.5rem;
+}
+
+.app-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    cursor: pointer;
+}
+
+.app-card-link:hover { text-decoration: none; }
+
+.app-card {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.app-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    border-color: #9B7FD4;
+}
+
+.app-card-image {
+    position: relative;
+    height: 195px;
+    overflow: hidden;
+    background: #e8edf7;
+}
+
+.app-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.app-card:hover .app-card-image img { transform: scale(1.05); }
+
+/* Badge overlaid on the card image (top-left corner) */
+.app-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(26, 43, 87, 0.85);
+    color: white;
+    font-size: 0.67rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    backdrop-filter: blur(4px);
+}
+
+.app-card-body {
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.app-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #9B7FD4;
+    margin: 0 0 0.6rem;
+    line-height: 1.35;
+}
+
+.app-card-desc {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--bs-secondary-color);
+    flex: 1;
+    margin-bottom: 1rem;
+}
+
+.app-launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #9B7FD4;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--bs-border-color-translucent);
+    margin-top: auto;
+    transition: gap 0.2s ease;
+}
+
+.app-card:hover .app-launch-btn {
+    gap: 0.65rem;
+    color: #B49DE0;
+}
+
+/* ---- 7. Feature / Sidebar Cards ----------------------------- */
+/*
+   Five-column grid of small feature preview cards in the User Guide tab.
+   Each card shows a screenshot + title + description.
+*/
+.sidebar-card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin: 1.25rem auto 1.5rem;
+}
+
+.sidebar-card {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-align: center;
+}
+
+.sidebar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    background-color: var(--bs-tertiary-bg, #f8f9fa);
+    padding: 10px;
+    display: block;
+}
+
+.sidebar-caption {
+    padding: 10px 12px 14px;
+    border-top: 1px solid var(--bs-border-color-translucent);
+}
+
+.sidebar-caption h4 {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bs-body-color);
+}
+
+.sidebar-caption p {
+    font-size: 0.78rem;
+    margin: 0;
+    color: var(--bs-secondary-color);
+    line-height: 1.4;
+}
+
+/* ---- 8. Image Display --------------------------------------- */
+.img-center {
+    text-align: center;
+    margin: 1.25rem auto;
+}
+
+.img-center img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- 9. DOI Badge ------------------------------------------ */
+/*
+   Inline pill used for Zenodo / DOI links.
+   Uses Bootstrap Icons (bi-box-arrow-up-right) which are available
+   because bslib loads Bootstrap Icons CSS automatically.
+*/
+.doi-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    background: #eef2fb;
+    border: 1px solid #c5d0e8;
+    border-radius: 5px;
+    padding: 2px 9px;
+    color: #9B7FD4;
+    text-decoration: none;
+    vertical-align: middle;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.doi-badge:hover {
+    background: #9B7FD4;
+    color: white;
+    text-decoration: none;
+    border-color: #9B7FD4;
+}
+
+[data-bs-theme="dark"] .doi-badge {
+    background: rgba(68, 114, 196, 0.15);
+    border-color: rgba(68, 114, 196, 0.4);
+    color: var(--bs-primary);
+}
+
+[data-bs-theme="dark"] .doi-badge:hover {
+    background: var(--bs-primary);
+    color: white;
+    border-color: var(--bs-primary);
+}
+
+/* ---- 10. Footer -------------------------------------------- */
+.home-footer {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid var(--bs-border-color-translucent);
+    color: var(--bs-secondary-color);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+/* ---- 10. Responsive breakpoints ---------------------------- */
+@media (max-width: 860px) {
+    .app-grid            { grid-template-columns: repeat(2, 1fr); }
+    .sidebar-card-grid   { grid-template-columns: repeat(3, 1fr); }
+    .stats-strip         { gap: 0.85rem; }
+}
+
+@media (max-width: 540px) {
+    .app-grid            { grid-template-columns: 1fr; }
+    .sidebar-card-grid   { grid-template-columns: repeat(2, 1fr); }
+    .home-banner h1      { font-size: 1.5rem; }
+}
+
+/* ---- 11. Dark mode overrides ------------------------------- */
+/*
+   bslib sets data-bs-theme="dark" on <html> when dark mode is active.
+   All color-sensitive rules are mirrored here.
+*/
+[data-bs-theme="dark"] .stat-number          { color: var(--bs-primary); }
+[data-bs-theme="dark"] .stat-item            { box-shadow: none; }
+
+[data-bs-theme="dark"] .app-card             { box-shadow: none; }
+[data-bs-theme="dark"] .app-card:hover       { box-shadow: 0 0 14px rgba(255,255,255,0.06); border-color: var(--bs-gray-500); }
+[data-bs-theme="dark"] .app-card-image       { background: var(--bs-gray-800); }
+[data-bs-theme="dark"] .app-card-title       { color: var(--bs-primary); }
+[data-bs-theme="dark"] .app-launch-btn       { color: var(--bs-primary); }
+[data-bs-theme="dark"] .app-card:hover .app-launch-btn { color: var(--bs-primary); filter: brightness(1.2); }
+
+[data-bs-theme="dark"] .sidebar-card         { box-shadow: none; }
+[data-bs-theme="dark"] .sidebar-card img     { background-color: var(--bs-gray-800); }
+
+[data-bs-theme="dark"] .tab-section h3       { color: var(--bs-primary); }
+
+[data-bs-theme="dark"] .callout-note         { background: rgba(68, 114, 196, 0.14); }
+[data-bs-theme="dark"] .callout-warning      { background: rgba(230, 168, 23, 0.12); }
+[data-bs-theme="dark"] .callout-important    { background: rgba(192, 57, 43, 0.12); }
